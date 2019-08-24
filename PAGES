@@ -1,0 +1,58 @@
+/
+    - got name cookie? -> got_name
+    - else -> get_name
+get_name
+    - ask for name
+    - set name cookie for 1 year
+    - redirect to got_name
+got_name
+    - if tournament in progress -> tournament_home
+    - else -> start_tournament
+start_tournament
+    - ask for number of tables
+    - set up tournament in progress
+    - redirect to tournament_home
+tournament_home
+    - tournament done link -> start_tournament
+    - delete tournament link -> start_tournament
+    - start game link
+start_game
+    - tournament done button -> start_tournament
+    - if name in game -> count_meld
+    - get table and partner
+    - set up game for table, possibly adding the other partnership to it
+    - -> count_meld
+count_meld
+    - get meld
+      - incl suits for marriages
+      ? incl suits for runs
+    - total button -> count_meld
+    - final button -> get_bid
+get_bid
+    - if bid not yet stored:
+        - get bid and trump
+        - store them -> get_bid
+    - else
+        - get #trump, #trump_aces, #aces
+        - store them -> score_meld
+
+===========================================================
+
+score_meld
+    - has list of players, shows meld scores and who's validated them
+      - shows meld score
+      - shows who's validated and invalidated their score
+      - Check button -> check_player
+    - get trick points -> final_game_score
+    - button for "take remainder" -> final_game_score
+check_player
+    - looks like count_meld
+    - Verify button -> score_meld
+    - Error button -> score_meld
+final_game_score
+    - display final scores for each hand
+    - display final game scores for each prior game
+    - display running totals for each player (sorted)
+    - new hand button -> count_meld
+    - new game button -> start_game
+    - tournament done button -> start_tournament

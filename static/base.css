@@ -1,0 +1,66 @@
+/* base.css */
+
+/*
+extra small devices (phones) up to 600px width
+small devices (large phones) up to 768px width
+medium devices (landscape tablets) up to 992px width
+large devices (laptops/desktops) up to 1200px
+extra large devices (large laptops and desktops) >= 1200px
+
+Can use max-width: or min-width:, also orientation: landscape/portrait
+
+@media only screen and (max-width: 600px) {
+   standard_css declarations
+}
+
+@media only screen and (max-width: 768px) {
+
+selector: tag #id .class
+
+selector[, selector]* {styles}
+
+*/
+
+
+body {
+    font-size: 25px;
+}
+
+
+input[type="radio"] {
+    width: 18px;
+    height: 18px;
+}
+
+table {
+    border-collapse: collapse;
+    margin-bottom: 5px;
+}
+
+td th {
+    text-align: center;
+}
+
+button {
+    font-size: 90%;
+}
+
+.right-border {
+    border-right: 1px solid black;
+}
+
+.bottom-border {
+    border-bottom: 1px solid black;
+}
+
+.middle-row {
+}
+
+.striped tr:nth-child(even) {
+    background-color: #e8e8e8;
+}
+
+.full-width {
+    width: 98%;
+}
+
