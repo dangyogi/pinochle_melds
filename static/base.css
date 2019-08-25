@@ -33,6 +33,11 @@ input[type="radio"] {
 }
 
 
+input[type="number"] {
+    font-size: 90%;
+}
+
+
 select {
     font-size: 90%;
     margin-bottom: 5px;

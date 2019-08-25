@@ -95,6 +95,7 @@ def clear_cards(session):
         for suit in Suits:
             key = f"{den}_{suit}"
             session[key] = 0
+    session['trump'] = "hearts"
 
 
 @post("/count_cards")
@@ -196,46 +197,33 @@ def make_bid():
     redirect('/show_bids')
 
 
-@post('/get_tricks')
-def get_tricks():
-    print("get_tricks called")
-    trump_aces = request.forms.trump_aces
-    trump = request.forms.trump
-    aces = request.forms.aces
-    who_won_bid = request.forms.who_won_bid
-    trick_points = request.forms.trick_points
-    print("get_tricks got", trump_aces, trump, aces, who_won_bid, trick_points)
+@post("/meld")
+def meld():
+    print("meld called")
+    session = get_session()
+    session['who_won_bid'] = request.forms.who_won_bid
+    session['trump'] = request.forms.trump
+    redirect("/show_meld")
+
+
+@post('/show_meld')
+def show_meld():
+    print("show_meld called")
+    session = get_session()
+    trick_points = int(request.forms.trick_points)
+    print("show_meld got", trick_points)
     csv_path = os.path.join(PROJECT_DIR, 'trick_hints.csv')
     csv_exists = os.path.exists(csv_path)
     day_of_week, date, hhmm = time.strftime("%a,%Y-%m-%d,%H:%M").split(',')
     with open(csv_path, 'at') as f:
         if not csv_exists:
+            # FIX
             print("trump", "trump_aces", "aces", "who_won_bid", "trick_points",
                   "day_of_week", "date", "time", sep=',', file=f)
+        # FIX
         print(trump, trump_aces, aces, who_won_bid, trick_points,
               day_of_week, date, hhmm, sep=',', file=f)
-    #redirect('/count_meld')
-    redirect('/count_cards')
-
-
-@post('/get_bid')
-def get_bid():
-    print("get_bid called")
-    check_tournament()
-    player = get_player()
-    game = classes.Current_Tournament.get_game_with_player(player)
-    if game is None:
-        redirect('/start_game')
-    hand = game.get_hand()
-    bid = request.forms.bid
-    trump = request.forms.trump
-    print("get_bid got", repr(bid), repr(trump))
-    if hand is None or hand.done:
-        redirect('/start_game')
-    if bid:
-        hand.bid = int(bid)
-        hand.trump = trump
-    redirect('/get_bid')
+    redirect('/')
 
 
 @get('/<page>')
