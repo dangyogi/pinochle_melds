@@ -4,13 +4,9 @@
 
 <form method="post" action="/get_bid">
 <label>Bid:<input type="number" name="bid" min="50" max="999"></label>
-<label>Trump:<select name="trump">
-<option value="spades">Spades</option>
-<option value="clubs">Clubs</option>
-<option value="hearts">Hearts</option>
-<option value="diamonds">Diamonds</option>
-</select>
-</label>
+
+% include("select_trump.tpl")
+
 <button type="submit">Bid</button>
 </form>
 

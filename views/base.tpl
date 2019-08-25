@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <title>{{title or 'No Title'}}</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale={{get('initial_scale', 1.0)}}">
   <link rel="stylesheet" href="/static/base.css">
 % if defined("script"):
   <script type="text/javascript" src="/static/{{script}}"></script>

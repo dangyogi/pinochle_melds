@@ -5,13 +5,13 @@
 % end
 
 % if get('max', 4) >= value:
-  <input type="radio" name="{{name}}" value="{{value}}"
+  <input type="radio" name="{{name}}" value="{{value}}" \\
     % if get(name, 0) == value:
-      checked="checked"
+      checked \\
     % end
     % if defined('attr'):
-      {{!attr}}
+      {{!attr}}\\
     % end
-  >
+>
 % end
 </td>
