@@ -4,7 +4,7 @@
 
 You have {{partner_total}} total partnership meld points.
 
-<table class="bids striped">
+<table class="bids striped full-width">
 % for row in range(11, 16):
 <tr>
 % for col in range(6):

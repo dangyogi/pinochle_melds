@@ -112,6 +112,8 @@ def count_cards():
             cards[den, suit] = session[key] = count
             by_den[den][suit] += count
             by_suit[suit][den] += count
+            print(key, count, sep='=', end=',')
+        print()
 
     # {trump_suit: {meld: (number, meld_points)}}
     melds = defaultdict(lambda: defaultdict(lambda: (0, 0)))
@@ -210,18 +212,18 @@ def meld():
 def show_meld():
     print("show_meld called")
     session = get_session()
-    trick_points = int(request.forms.trick_points)
-    print("show_meld got", trick_points)
+    session['trick_points'] = int(request.forms.trick_points)
+    print("show_meld got", session['trick_points'])
     csv_path = os.path.join(PROJECT_DIR, 'trick_hints.csv')
     csv_exists = os.path.exists(csv_path)
     day_of_week, date, hhmm = time.strftime("%a,%Y-%m-%d,%H:%M").split(',')
+    columns = ["who_won_bid", "trump", "trick_points"] + \
+              [f"{den}_{suit}" for den in Denominations for suit in Suit_names]
     with open(csv_path, 'at') as f:
         if not csv_exists:
-            # FIX
-            print("trump", "trump_aces", "aces", "who_won_bid", "trick_points",
-                  "day_of_week", "date", "time", sep=',', file=f)
-        # FIX
-        print(trump, trump_aces, aces, who_won_bid, trick_points,
+            print(','.join(columns), "day_of_week", "date", "time",
+                  sep=',', file=f)
+        print(','.join(str(session[key]) for key in columns),
               day_of_week, date, hhmm, sep=',', file=f)
     redirect('/')
 

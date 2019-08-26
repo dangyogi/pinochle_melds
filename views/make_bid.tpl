@@ -2,7 +2,7 @@
 
 <table>
 <tr>
-<td class="right-border fat-border">
+<td class="fat-border">
 <form method="post" action="/make_bid">
 <label>Partner's Meld Bid:
 <table>
@@ -27,7 +27,7 @@ checked\\
 <button type="submit">Show Bids</button>
 </form>
 </td>
-<td>
+<td class="fat-border">
 You have {{min(meld_points.values())}} meld points to bid.<br>
 <a href="/meld">Meld</a>
 </td>

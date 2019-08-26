@@ -35,6 +35,8 @@ input[type="radio"] {
 
 input[type="number"] {
     font-size: 90%;
+    text-align: right;
+    border-color: #808080;
 }
 
 
@@ -96,3 +98,29 @@ button {
     border-top: 1px solid black;
     padding-right: 7px;
 }
+
+table.show_meld {
+    border: 1px solid black;
+    margin-top: 5px;
+    text-align: center;
+}
+
+.show_meld th,td {
+    border-width: 1px;
+    border-style: solid;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+table .red_right {
+    border-right-color: red;
+    border-right-width: 5px;
+}
+
+/*
+table.show_meld th:nth-child(2) {
+    border-left-color: red;
+    border-left-width: 10px;
+    padding-left: 15px;
+}
+*/
