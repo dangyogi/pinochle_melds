@@ -16,15 +16,15 @@ class="red_right"\\
 % if i % 2 == 1:
 </tr>
 % end
+% end
 % if i % 2 == 0:
 </tr>
-% end
 % end
 </table>
 
 You have {{meld_points[trump]}} total meld points.
 
-<form method="post" action="/show_meld">
+<form method="post" action="/pinochle/show_meld">
 <label>Trick Points Taken: <input type="number" name="trick_points" min="0" max="50">
 </label>
 </form>

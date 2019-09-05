@@ -20,6 +20,9 @@ from bottle import (
 #import classes
 
 
+URL_ROOT = '/pinochle'
+
+
 SECRET = 'asdlfj;l3kj4lkjsorzughypaob8usoaru7b0SDFWERSXBBBBBu1'
 CODE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_DIR = os.path.dirname(CODE_DIR)
@@ -83,11 +86,12 @@ def favicon():
     raise HTTPError(404, 'Not Found');
 
 
-@get('/')
+@get(URL_ROOT)
+@get(URL_ROOT + '/')
 def home():
     print("home called")
     clear_cards(get_session())
-    redirect('/count_cards')
+    redirect(URL_ROOT + '/count_cards')
 
 
 def clear_cards(session):
@@ -96,9 +100,11 @@ def clear_cards(session):
             key = f"{den}_{suit}"
             session[key] = 0
     session['trump'] = "hearts"
+    if 'who_won_bid' in session:
+        del session['who_won_bid']
 
 
-@post("/count_cards")
+@post(URL_ROOT + "/count_cards")
 def count_cards():
     print("count_cards called")
     session = get_session()
@@ -187,28 +193,29 @@ def count_cards():
         print(suit, melds[suit])
         print(suit, meld_points[suit])
     session['meld_points'] = meld_points
-    redirect("/make_bid")
+    redirect(URL_ROOT + "/make_bid")
 
 
-@post("/make_bid")
+@post(URL_ROOT + "/make_bid")
 def make_bid():
     print("make_bid called")
     session = get_session()
     session['partners_meld_bid'] = int(request.forms.partners_meld_bid)
     session['trump'] = request.forms.trump
-    redirect('/show_bids')
+    session['who_won_bid'] = 'me'
+    redirect(URL_ROOT + '/show_bids')
 
 
-@post("/meld")
+@post(URL_ROOT + "/meld")
 def meld():
     print("meld called")
     session = get_session()
     session['who_won_bid'] = request.forms.who_won_bid
     session['trump'] = request.forms.trump
-    redirect("/show_meld")
+    redirect(URL_ROOT + "/show_meld")
 
 
-@post('/show_meld')
+@post(URL_ROOT + '/show_meld')
 def show_meld():
     print("show_meld called")
     session = get_session()
@@ -225,10 +232,10 @@ def show_meld():
                   sep=',', file=f)
         print(','.join(str(session[key]) for key in columns),
               day_of_week, date, hhmm, sep=',', file=f)
-    redirect('/')
+    redirect(URL_ROOT)
 
 
-@get('/<page>')
+@get(URL_ROOT + '/<page>')
 def serve(page):
     print("serve called with", page)
     session = get_session()
@@ -237,7 +244,7 @@ def serve(page):
                     **session)
 
 
-@get('/static/<filename>')
+@get(URL_ROOT + '/static/<filename>')
 def static(filename):
     print("static called with", filename)
     return static_file(filename, root=STATIC_DIR)
@@ -249,4 +256,12 @@ bottle.TEMPLATE_PATH = [VIEWS_DIR]
 #print("STATIC_DIR", STATIC_DIR)
 #print("TEMPLATE_PATH", bottle.TEMPLATE_PATH)
 
-run(host='0.0.0.0', port=8080, reloader=True, debug=True)
+
+if __name__ == "__main__":
+    #run(host='127.0.0.1', port=8080, reloader=True, debug=True)
+    run(host='127.0.0.1', port=8080, server='gunicorn', workers=1,
+        access_logfile='/var/log/pinochle/access.log',
+        error_logfile='/var/log/pinochle/error.log',
+    )
+else:
+    application = bottle.default_app()

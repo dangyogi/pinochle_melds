@@ -1,4 +1,4 @@
-<form method="post" action="/start_tournament">
+<form method="post" action="/pinochle/start_tournament">
 <label>Number of Tables:
   <input type="number" name="tables" min="1" max="9" value="1">
 </label>

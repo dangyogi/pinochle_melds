@@ -1,7 +1,7 @@
 <!-- % rebase('tournament_base.tpl', title='Count Meld') -->
 % rebase('base.tpl', title='Count Cards', script='count_cards.js')
 
-<form method="post" action="/count_cards">
+<form method="post" action="/pinochle/count_cards">
 
 <table class="striped full-width">
 <tr style="font-size: 135%"><th class="right-border"></th>

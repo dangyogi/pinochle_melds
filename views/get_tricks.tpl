@@ -42,7 +42,7 @@ You have {{min(meld_points.values())}} meld points for a meld bid<br>
 % my_meld_points = max(meld_points.values())
 You have {{my_meld_points}} meld points if you are highest bidder<br>
 
-<form method="post" action="/get_partner_meld">
+<form method="post" action="/pinochle/get_partner_meld">
 <label>Partner's Meld Bid: <input type="number" name="partner_meld_bid" min="0" max="99"></label>
 </form>
 
@@ -79,7 +79,7 @@ Total Meld Points: {{partner_total}}<br>
 </table>
 % end
 
-<form method="post" action="/get_tricks">
+<form method="post" action="/pinochle/get_tricks">
 
 <label>Who won bid:<select name="who_won_bid">
 <option value="me">Me</option>

@@ -15,4 +15,4 @@ You have {{partner_total}} total partnership meld points.
 % end
 </table>
 
-<a href="/meld">Meld</a>
+<a href="/pinochle/meld">Meld</a>

@@ -3,7 +3,7 @@
 
 <h3>Start Game</h3>
 
-<form method="post" action="/start_game">
+<form method="post" action="/pinochle/start_game">
 <label>Table Number:
 <input type="number" name="table" min="1" max="9" value="1">
 </label>

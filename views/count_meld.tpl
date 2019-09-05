@@ -1,7 +1,7 @@
 <!-- % rebase('tournament_base.tpl', title='Count Meld') -->
 % rebase('base.tpl', title='Count Meld')
 
-<form method="post" action="/count_meld">
+<form method="post" action="/pinochle/count_meld">
 
 <table>
 <tr><th></th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th></tr>
@@ -96,6 +96,6 @@ With Partner's Meld: {{partner_total}}
 </table>
 % end
 
-<form action="/get_tricks">
+<form action="/pinochle/get_tricks">
 <button type="submit">Record Tricks</button>
 </form>

@@ -3,7 +3,7 @@
 <table>
 <tr>
 <td class="fat-border">
-<form method="post" action="/make_bid">
+<form method="post" action="/pinochle/make_bid">
 <label>Partner's Meld Bid:
 <table>
 <tr>
@@ -29,7 +29,7 @@ checked\\
 </td>
 <td class="fat-border">
 You have {{min(meld_points.values())}} meld points to bid.<br>
-<a href="/meld">Meld</a>
+<a href="/pinochle/meld">Meld</a>
 </td>
 </tr>
 </table>
